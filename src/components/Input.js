@@ -4,26 +4,24 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 function Input({ label, type = "text", ...props }) {
-
-  const inputRef = useRef()
+  const inputRef = useRef();
   const [show, setShow] = useState(false);
   const [inputType, setType] = useState(type);
 
   useEffect(() => {
     if (show) {
-      setType("text")
-      inputRef.current.focus()
-    }
-    else if (type==="password") {
-      setType("password")
-      inputRef.current.focus()
+      setType("text");
+      inputRef.current.focus();
+    } else if (type === "password") {
+      setType("password");
+      inputRef.current.focus();
     }
   }, [show]);
 
   return (
     <label className="block relative flex bg-zinc-50 border rounded-sm focus-within:border-gray-400 ">
       <input
-      ref={inputRef}
+        ref={inputRef}
         required={true}
         type={inputType}
         className="px-2 outline-none text-xs w-full h-[38px] valid:pt-[10px] peer"
