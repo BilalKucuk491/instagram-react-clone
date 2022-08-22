@@ -7,6 +7,7 @@ export default function ProfileTagged() {
         <Icon name="tagged" size={34} />
       </div>
       <h6 className="text-[28px] font-light">No Photos</h6>
+       <h6 className="text-[28px] font-light">No Photos</h6>
     </div>
   )
 }
