@@ -1,13 +1,43 @@
 import AuthLayout from "pages/auth";
-import Login from "pages/login";
+import Login from "pages/auth/login";
+import Register from "pages/auth/register";
 import PrivateRoute from "components/PrivateRoute";
 import Home from "pages/home";
+import MainLayout from "pages/layout";
+import { ProfileLayout } from "pages/profile";
+import ProfilePosts from "pages/profile/posts";
+import ProfileTagged from "pages/profile/tagged";
+import Logout from "pages/logout";
 
 const routes = [
   {
     path: "/",
-    element: <Home />,
+    element: <MainLayout />,
     auth: true,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path:"logout",
+        element:<Logout/>
+      },
+      {
+        path:":username",
+        element:<ProfileLayout/>,
+        children:[
+          {
+            index:true,
+            element:<ProfilePosts/>
+          },
+          {
+            path:"tagged",
+            element:<ProfileTagged/>
+          }
+        ]
+      }
+    ],
   },
   {
     path: "/auth",
@@ -16,6 +46,10 @@ const routes = [
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },
@@ -26,7 +60,7 @@ const authCheck = (routes) =>
     if (route?.auth) {
       route.element = <PrivateRoute>{route.element}</PrivateRoute>;
     }
-    if (route?.children) {  
+    if (route?.children) {
       route.children = authCheck(route.children);
     }
     return route;

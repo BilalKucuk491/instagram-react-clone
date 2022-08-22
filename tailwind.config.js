@@ -8,7 +8,8 @@ module.exports = {
       colors:{
         brand:"#0095f6",
         facebook:"#385185",
-        link:"#00376B"
+        link:"#00376B",
+        instagram_gray:"#8e8e8e"
       },
       backgroundImage:{
         "logo-pattern":"url(https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png)"

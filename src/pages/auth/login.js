@@ -2,16 +2,24 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import Input from "components/Input";
 import { AiFillFacebook } from "react-icons/ai";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, Link } from "react-router-dom";
 import { login } from "firebase.js";
 import { Formik, Form } from "formik";
 import { LoginSchema } from "validation";
 import { imageLinks } from "images/imageLinks";
+import Button from "components/Button";
+import Separator from "components/Separator";
+import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 
 export default function Login() {
-  const navigate = useNavigate();
+  
+  const user = useSelector(state=>state.auth.user)
   const location = useLocation();
   const ref = useRef();
+
+  
+  
 
   useEffect(() => {
     let images = ref.current.querySelectorAll("img"),
@@ -29,23 +37,28 @@ export default function Login() {
     };
   }, [ref]);
 
+  if (user) {
+    return <Navigate to={location.state?.return_URL || "/"} replace={true} />
+  }
+
+
   const handleSubmit = async (values, actions) => {
     await login(values.username, values.password);
-
-    navigate(location.state?.return_URL || "/", {
-      replace: true,
-    });
   };
 
   const images = [
-		'https://www.instagram.com/static/images/homepage/screenshots/screenshot1-2x.png/cfd999368de3.png',
-		'https://www.instagram.com/static/images/homepage/screenshots/screenshot2-2x.png/80b8aebdea57.png',
-		'https://www.instagram.com/static/images/homepage/screenshots/screenshot3-2x.png/fe2540684ab2.png',
-		'https://www.instagram.com/static/images/homepage/screenshots/screenshot4-2x.png/8e9224a71939.png'
-	]
+    "https://www.instagram.com/static/images/homepage/screenshots/screenshot1-2x.png/cfd999368de3.png",
+    "https://www.instagram.com/static/images/homepage/screenshots/screenshot2-2x.png/80b8aebdea57.png",
+    "https://www.instagram.com/static/images/homepage/screenshots/screenshot3-2x.png/fe2540684ab2.png",
+    "https://www.instagram.com/static/images/homepage/screenshots/screenshot4-2x.png/8e9224a71939.png",
+  ];
 
   return (
     <div className="h-full w-full flex flex-wrap overflow-auto items-center gap-x-2  justify-center">
+      
+      <Helmet>
+        <title>Login 	&#183; Instagram</title>
+      </Helmet>
       <div className="hidden md:block w-[450px] h-[581px] bg-logo-pattern relative bg-[length:468.32px_634.15px] bg-[top_left-46px_0]">
         <div
           className="w-[250px] h-[538px] absolute top-[27px] right-[42px]"
@@ -63,9 +76,9 @@ export default function Login() {
       </div>
       <div className="w-[350px] grid gap-y-3">
         <div className="bg-white border px-[40px] pt-10 pb-6">
-          <a href="#" className="flex justify-center mb-8 ">
+          <div className="flex justify-center mb-8 pointer-events-none ">
             <img className="h-[51px]" src={imageLinks.instagram_logo} />
-          </a>
+          </div>
           <Formik
             validationSchema={LoginSchema}
             initialValues={{
@@ -82,20 +95,15 @@ export default function Login() {
                 />
                 <Input type="password" name="password" label="Password" />
 
-                <button
+                <Button
                   type="submit"
                   disabled={!isValid || !dirty || isSubmitting}
-                  className="h-[30px] mt-1 rounded bg-brand text-white text-sm font-medium disabled:opacity-50"
                 >
                   Log In
-                </button>
-                <div className="flex items-center my-2.5 mb-3.5">
-                  <div className="h-px bg-gray-300 flex-1" />
-                  <span className="px-4 text-[13px] font-semibold text-gray-500">
-                    OR
-                  </span>
-                  <div className="h-px bg-gray-300 flex-1" />
-                </div>
+                </Button>
+
+                <Separator />
+
                 <a
                   href="#"
                   className="flex mb-2.5 justify-center items-center gap-x-2 text-sm font-semibold text-facebook"
@@ -116,9 +124,9 @@ export default function Login() {
 
         <div className="bg-white border p-4 text-sm text-center">
           Don't have a account?{" "}
-          <a href="#" className="text-brand font-semibold">
+          <Link to="/auth/register" className="text-brand font-semibold">
             Sign up
-          </a>
+          </Link>
         </div>
         <div></div>
         <div className="p-4 text-sm text-center">
@@ -144,7 +152,11 @@ export default function Login() {
             />
           </a>
         </div>
+
+
       </div>
     </div>
+            
+
   );
 }

@@ -7,10 +7,10 @@ function Search() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-[268px] relative group">
+    <div className="w-[268px] relative group mr-20">
       <span
         className={classnNames({
-          "absolute text-[#8e8e8e] top-0 left-0 h-9 w-9 flex items-center justify-center": true,
+          "absolute text-[#8e8e8e] pointer-events-none top-0 left-0 h-9 w-9 flex items-center justify-center": true,
           hidden: open,
         })}
       >
