@@ -27,7 +27,7 @@ export default function Register() {
     <div className="w-[350px] grid gap-y-3 mt-8 mb-8">
 
       <Helmet>
-        <title>Register &#183; Instagram </title>
+        <title>Register &#8226; Instagram </title>
       </Helmet>
       <div className="bg-white border px-[40px] pt-10 pb-6">
         <a href="#" className="flex justify-center mb-4">

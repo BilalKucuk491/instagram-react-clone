@@ -57,7 +57,7 @@ export default function Login() {
     <div className="h-full w-full flex flex-wrap overflow-auto items-center gap-x-2  justify-center">
       
       <Helmet>
-        <title>Login 	&#183; Instagram</title>
+        <title>Login &#8226; Instagram</title>
       </Helmet>
       <div className="hidden md:block w-[450px] h-[581px] bg-logo-pattern relative bg-[length:468.32px_634.15px] bg-[top_left-46px_0]">
         <div

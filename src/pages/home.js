@@ -5,8 +5,9 @@ function Home() {
       <Helmet>
         <title>Instagram</title>
       </Helmet>
-      home page
+      home page 
     </div>
+    
   )
 }
 

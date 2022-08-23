@@ -37,7 +37,7 @@ export function ProfileLayout() {
     user && (
       <div>
         <Helmet>
-          <title>{user.fullName} (@{user.username}) &#183; Instagram photos and videos</title>
+          <title>{user.fullName} (@{user.username}) &#8226; Instagram photos and videos</title>
         </Helmet>
         <Header user={user} />
         <nav className="border-t-2 flex gap-x-16 justify-center items-center">
